@@ -3,8 +3,8 @@ This project demonstrates NESTED LOOPS (i.e., loops within loops)
 in the context of TWO-DIMENSIONAL GRAPHICS.
 
 Authors: David Mutchler, Valerie Galluzzi, Mark Hays, Amanda Stouder,
-         their colleagues and PUT_YOUR_NAME_HERE.
-"""  # TODO: 1. PUT YOUR NAME IN THE ABOVE LINE.
+         their colleagues and TJ Ballard.
+"""  # DONE: 1. PUT YOUR NAME IN THE ABOVE LINE.
 
 import rosegraphics as rg
 
@@ -80,9 +80,21 @@ def draw_L(window, circle, r, c):
     and m and n are small, positive integers.
     """
     # ------------------------------------------------------------------
-    # TODO: 2. Implement and test this function.
+    # DONE: 2. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    y = circle.center.y
+    x = circle.center.x
+    p = x
+
+    for k in range(r):
+        for j in range(3):
+            new_circle = rg.Circle(rg.Point(x, y), circle.radius)
+            new_circle.attach_to(window)
+            window.render(0.1)
+            x = x + 2 * circle.radius
+        y = y + 2 * circle.radius
+        x = p
 
 
 def run_test_draw_wall_on_right():
@@ -121,9 +133,27 @@ def draw_wall_on_right(rectangle, n, window):
     and n is a small, positive integer.
     """
     # ------------------------------------------------------------------
-    # TODO: 3. Implement and test this function.
+    # DONE: 3. Implement and test this function.
     #     The testing code is already written for you (above).
     # ------------------------------------------------------------------
+    c1x = rectangle.corner_1.x
+    c1y = rectangle.corner_1.y
+    c2x = rectangle.corner_2.x
+    c2y = rectangle.corner_2.y
+    x1 = c1x
+    x2 = c2x
+
+    for k in range(n):
+        for j in range(k + 1):
+            new_rect = rg.Rectangle(rg.Point(c1x, c1y), rg.Point(c2x, c2y))
+            new_rect.attach_to(window)
+            window.render(0.1)
+            c1x = c1x - rectangle.get_width()
+            c2x = c2x - rectangle.get_width()
+        c1y = c1y + rectangle.get_height()
+        c2y = c2y + rectangle.get_height()
+        c1x = x1
+        c2x = x2
 
 
 # ----------------------------------------------------------------------
